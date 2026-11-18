@@ -747,7 +747,9 @@ async function connect() {
     version,
     auth: state,
     logger,
-    browser: Browsers.macOS('Desktop'), // "Desktop" gets a larger history sync
+    // Se présente comme WhatsApp Web (Chrome) : notre numéro éjecte les appareils "Desktop".
+    // WA_BROWSER=Desktop rétablit l'ancien comportement (historique plus long).
+    browser: Browsers.macOS(process.env.WA_BROWSER || 'Chrome'),
     syncFullHistory: false,
     markOnlineOnConnect: false,          // so your phone keeps getting notifications
   });
