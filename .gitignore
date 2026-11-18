@@ -1,0 +1,6 @@
+node_modules/
+auth/
+media/
+store.json
+store.json.tmp
+debug.log
