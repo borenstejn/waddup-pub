@@ -791,6 +791,9 @@ async function connect() {
     if (connection === 'close') {
       const code = lastDisconnect?.error?.output?.statusCode;
       if (code === DisconnectReason.loggedOut) {
+        // Garde la raison du refus (wipeAndExit efface debug.log).
+        appendFileSync(new URL('./logout-reason.log', import.meta.url).pathname,
+          `${new Date().toISOString()} ${inspect(lastDisconnect?.error, { depth: 6 })}\n`, { mode: 0o600 });
         wipeAndExit('Session was logged out from the phone. Deleted ./auth, ./store.json and ./media — run again to re-link.', 1);
       }
       // restartRequired (515) is normal right after linking; everything else: retry.

@@ -4,3 +4,4 @@ media/
 store.json
 store.json.tmp
 debug.log
+logout-reason.log
